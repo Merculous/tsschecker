@@ -15,7 +15,7 @@ esac
 
 # Checks for programs.
 AC_PROG_CC
-CFLAGS+=" -std=gnu11"
+CFLAGS+=" -std=c11"
 AC_PROG_INSTALL
 AC_PROG_LIBTOOL
 AC_CONFIG_MACRO_DIRS([m4])
@@ -42,7 +42,7 @@ AC_ARG_WITH(
     ]
 )
 
-PKG_CHECK_MODULES(libplist, libplist-2.0 >= 2.2.0)
+PKG_CHECK_MODULES(libplist, libplist-2.0 >= 2.0.0)
 PKG_CHECK_MODULES(libcurl, libcurl >= 1.0)
 PKG_CHECK_MODULES(libfragmentzip, libfragmentzip >= 48)
 AS_IF([test "x$with_libcrypto" != xno],
@@ -63,7 +63,9 @@ AC_TYPE_UINT8_T
 
 # Checks for library functions.
 AC_FUNC_ERROR_AT_LINE
-AC_CHECK_FUNCS([memset mkdir pow strchr strdup strstr malloc realloc])
+AC_FUNC_MALLOC
+AC_FUNC_REALLOC
+AC_CHECK_FUNCS([memset mkdir pow strchr strdup strstr])
 
 case $CFLAGS in
   *TSSCHECKER_NOMAIN*)
